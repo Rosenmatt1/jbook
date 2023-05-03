@@ -31,6 +31,7 @@ const App = () => {
 
 
   return <div>
+    <h1> Transpiler App </h1>
     <textarea value={input} onChange={e => setInput(e.target.value)}></textarea>
     <div>
       <button onClick={onClick}>Submit</button>
