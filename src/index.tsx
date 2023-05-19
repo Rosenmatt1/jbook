@@ -32,7 +32,6 @@ const App = () => {
         global: 'window'
       }
     });
-
     setCode(result.outputFiles[0].text)
   }
 

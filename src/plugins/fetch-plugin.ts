@@ -23,7 +23,7 @@ export const fetchPlugin = (inputCode: string) => {
         await fileCache.setItem('color', 'red');
       
       const color = await fileCache.getItem('color')
-      
+
       })()
 
       //Check to see if we have already fetched this file
@@ -37,8 +37,9 @@ export const fetchPlugin = (inputCode: string) => {
 
       const { data, request } = await axios.get(args.path)
       
+      const loader = args.path.match(/.css$/) ? 'css' : 'jsx';
       const result: esbuild.OnLoadResult = {
-        loader: 'jsx',
+        loader,
         contents: data,
         resolveDir: new URL('./', request.responseURL).pathname
       }
