@@ -53,6 +53,12 @@ const App = () => {
     })
   }
 
+  const html = `
+    <script>
+      ${code}
+    </script>
+  `
+
   return <div>
     <h1> Transpiler App </h1>
     <textarea value={input} onChange={e => setInput(e.target.value)}></textarea>
@@ -64,9 +70,6 @@ const App = () => {
   </div>
 }
 
-const html = `
-<h1> Local HTML doc </h1>
-`
 
 ReactDOM.render(
   <App />,
