@@ -4,6 +4,16 @@ import ReactDOM from 'react-dom';
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
 import { fetchPlugin } from './plugins/fetch-plugin';
 
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+
+// const App = () => <h1> Hi There! </h1>;
+
+// ReactDOM.render(
+//   <App/>,
+//   document.querySelector('#root')
+// );
+
 const App = () => {
   const ref = useRef<any>();
   const iframe = useRef<any>();
@@ -36,11 +46,11 @@ const App = () => {
     // setCode(result.outputFiles[0].text)
     iframe.current.contentWindow.postMessage(result.outputFiles[0].text, '*');
 
-    try {
-      eval(result.outputFiles[0].text)
-    } catch (err) {
+    // try {
+    //   eval(result.outputFiles[0].text)
+    // } catch (err) {
 
-    }
+    // }
     
   }
 
@@ -59,11 +69,16 @@ const App = () => {
     <html>
       <head> </head>
       <body>
-        <div id="root"> </div>
+        <div id="root"></div>
         <script>
           window.addEventListener('message', (event) => {
-            eval(event.data)
-          }, false)
+            try {
+              eval(event.data)
+            } catch (err) {
+              const root = document.querySelector('#root');
+              root.innerHTML = '<div>' + err + '</div>'            
+            }
+          }, false);
         </script>
       </body>
     </html>
@@ -76,7 +91,7 @@ const App = () => {
       <button onClick={onClick}>Submit</button>
     </div>
     <pre>{code}</pre>
-    <iframe ref={iframe} sandbox="" srcDoc={html}> </iframe>
+    <iframe ref={iframe} sandbox="allow-scripts" srcDoc={html}> </iframe>
   </div>
 }
 
