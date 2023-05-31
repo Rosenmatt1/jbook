@@ -18,12 +18,14 @@ const App = () => {
   const ref = useRef<any>();
   const iframe = useRef<any>();
   const [input, setInput] = useState('');
-  const [code, setCode] = useState('');
 
-  const onClick = async () => {
+
+  let onClick = async () => {
     if (!ref.current){
       return;
     }
+
+  iframe.current.srcdoc = html;
 
     // const result = await ref.current.transform(input, {
     //   loader: 'jsx',
@@ -43,7 +45,6 @@ const App = () => {
         global: 'window'
       }
     });
-    // setCode(result.outputFiles[0].text)
     iframe.current.contentWindow.postMessage(result.outputFiles[0].text, '*');
 
     // try {
@@ -76,7 +77,9 @@ const App = () => {
               eval(event.data)
             } catch (err) {
               const root = document.querySelector('#root');
-              root.innerHTML = '<div>' + err + '</div>'            
+              root.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + err + '</div>'       
+              // throw err
+              console.error(err)     
             }
           }, false);
         </script>
@@ -86,12 +89,14 @@ const App = () => {
 
   return <div>
     <h1> Transpiler App </h1>
-    <textarea value={input} onChange={e => setInput(e.target.value)}></textarea>
+    <textarea 
+      value={input} 
+      onChange = {(e) => setInput(e.target.value)}
+      ></textarea>
     <div>
       <button onClick={onClick}>Submit</button>
     </div>
-    <pre>{code}</pre>
-    <iframe ref={iframe} sandbox="allow-scripts" srcDoc={html}> </iframe>
+    <iframe title="preview" ref={iframe} sandbox="allow-scripts" srcDoc={html}> </iframe>
   </div>
 }
 
