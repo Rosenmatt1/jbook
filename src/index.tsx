@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
 import { fetchPlugin } from './plugins/fetch-plugin';
+import CodeEditor from './components/code-editor';
 
 // import React from 'react';
 // import ReactDOM from 'react-dom';
@@ -89,6 +90,7 @@ const App = () => {
 
   return <div>
     <h1> Transpiler App </h1>
+    <CodeEditor />
     <textarea 
       value={input} 
       onChange = {(e) => setInput(e.target.value)}
