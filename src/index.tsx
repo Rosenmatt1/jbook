@@ -90,7 +90,10 @@ const App = () => {
 
   return <div>
     <h1> Transpiler App </h1>
-    <CodeEditor />
+    <CodeEditor 
+    initialValue="const a = 1;"
+    onChange = {(value) => setInput(value)}
+    />
     <textarea 
       value={input} 
       onChange = {(e) => setInput(e.target.value)}
