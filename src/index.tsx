@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
 import { fetchPlugin } from './plugins/fetch-plugin';
 import CodeEditor from './components/code-editor';
+import Preview from './components/preview';
 
 // import React from 'react';
 // import ReactDOM from 'react-dom';
@@ -18,6 +19,7 @@ import CodeEditor from './components/code-editor';
 
 const App = () => {
   const ref = useRef<any>();
+  const [code, setCode] = useState('');
   const iframe = useRef<any>();
   const [input, setInput] = useState('');
 
@@ -26,8 +28,6 @@ const App = () => {
     if (!ref.current){
       return;
     }
-
-  iframe.current.srcdoc = html;
 
     // const result = await ref.current.transform(input, {
     //   loader: 'jsx',
@@ -46,8 +46,11 @@ const App = () => {
         'process.env.NODE_ENV': '"production"',
         global: 'window'
       }
+
+      // setCode(result.outputFiles[0].text)
+
     });
-    iframe.current.contentWindow.postMessage(result.outputFiles[0].text, '*');
+   
 
     // try {
     //   eval(result.outputFiles[0].text)
@@ -68,26 +71,7 @@ const App = () => {
     })
   }
 
-  const html = `
-    <html>
-      <head> </head>
-      <body>
-        <div id="root"></div>
-        <script>
-          window.addEventListener('message', (event) => {
-            try {
-              eval(event.data)
-            } catch (err) {
-              const root = document.querySelector('#root');
-              root.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + err + '</div>'       
-              // throw err
-              console.error(err)     
-            }
-          }, false);
-        </script>
-      </body>
-    </html>
-  `
+
 
   return <div>
     <h1> Transpiler App </h1>
@@ -102,7 +86,7 @@ const App = () => {
     <div>
       <button onClick={onClick}>Submit</button>
     </div>
-    <iframe title="preview" ref={iframe} sandbox="allow-scripts" srcDoc={html}> </iframe>
+    < Preview code={code} />
   </div>
 }
 
