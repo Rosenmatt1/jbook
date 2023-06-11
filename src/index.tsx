@@ -46,18 +46,9 @@ const App = () => {
         'process.env.NODE_ENV': '"production"',
         global: 'window'
       }
-
-      // setCode(result.outputFiles[0].text)
-
     });
-   
 
-    // try {
-    //   eval(result.outputFiles[0].text)
-    // } catch (err) {
-
-    // }
-    
+    setCode(result.outputFiles[0].text);
   }
 
   useEffect(() => {
@@ -79,10 +70,6 @@ const App = () => {
     initialValue="const a = 1;"
     onChange = {(value) => setInput(value)}
     />
-    <textarea 
-      value={input} 
-      onChange = {(e) => setInput(e.target.value)}
-      ></textarea>
     <div>
       <button onClick={onClick}>Submit</button>
     </div>
