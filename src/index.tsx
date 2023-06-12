@@ -1,9 +1,6 @@
 import 'bulmaswatch/superhero/bulmaswatch.min.css';
-import * as esbuild from 'esbuild-wasm';
 import { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
-import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
-import { fetchPlugin } from './plugins/fetch-plugin';
 import CodeEditor from './components/code-editor';
 import Preview from './components/preview';
 
@@ -50,20 +47,7 @@ const App = () => {
 
     setCode(result.outputFiles[0].text);
   }
-
-  useEffect(() => {
-    startService();
-  }, [])
-
-  const startService = async () => {
-    ref.current = await esbuild.startService({
-      worker: true,
-      wasmURL: '/esbuild.wasm'
-    })
-  }
-
-
-
+  
   return <div>
     <h1> Transpiler App </h1>
     <CodeEditor 
