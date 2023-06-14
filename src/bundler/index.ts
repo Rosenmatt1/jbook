@@ -10,4 +10,20 @@ export default async (rawCode: string) => {
       wasmURL: '/esbuild.wasm'
     })
   }
+
+  const result = await service.build({
+    entryPoints: ['index.js'],
+    bundle: true,
+    write: false,
+    plugins: [
+      unpkgPathPlugin(),
+      fetchPlugin(rawCode)
+    ],
+    define: {
+      'process.env.NODE_ENV': '"production"',
+      global: 'window'
+    }
+  });
+
+  return result.outputFiles[0].text
 }
