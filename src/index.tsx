@@ -1,23 +1,12 @@
 import 'bulmaswatch/superhero/bulmaswatch.min.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import ReactDOM from 'react-dom';
 import CodeEditor from './components/code-editor';
 import Preview from './components/preview';
 import bundle from './bundler';
 
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-
-// const App = () => <h1> Hi There! </h1>;
-
-// ReactDOM.render(
-//   <App/>,
-//   document.querySelector('#root')
-// );
-
 const App = () => {
   const [code, setCode] = useState('');
-  const iframe = useRef<any>();
   const [input, setInput] = useState('');
 
 
