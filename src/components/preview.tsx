@@ -34,8 +34,8 @@ const Preview: React.FC<PreviewProps> = ({ code }) => {
     iframe.current.contentWindow.postMessage(code, '*');
   }, [code]);
 
-  return <div>
-    <iframe  className="preview-wrapper" title="preview" style={{ backgroundColor: 'white' }} ref={iframe} sandbox="allow-scripts" srcDoc={html} />;
+  return <div className="preview-wrapper">
+    <iframe title="preview" ref={iframe} sandbox="allow-scripts" srcDoc={html} />;
   </div>
 }
 
