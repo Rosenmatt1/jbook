@@ -12,6 +12,7 @@ const Resizable: React.FC<ResizableProps> = ({ direction, children}) => {
 
   if(direction === 'horizontal') {
     resizableProps = {
+      className: 'resize-horizontal',
       minConstraints: [window.innerHeight * 0.2, Infinity],
       maxConstraints: [window.innerHeight * 0.75, Infinity],
       height: Infinity,
