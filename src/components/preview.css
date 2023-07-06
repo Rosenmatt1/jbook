@@ -3,7 +3,7 @@
   height: 100%;
 }
 
-.preview-wrapper iframe{
+.preview-wrapper iframe {
   height: 100%;
   background-color: white;
 }
@@ -15,5 +15,5 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: red;
+  opacity: 0;
 }
